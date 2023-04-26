@@ -109,28 +109,31 @@
         margin: 20px 30px;
         animation: slide 15s linear infinite;
       }
+      /* Add styles for the spinning wheel */
+
+
 
     </style>
 
-    <div class="input-area">
+    <div class="input-area" >
       <h1>Want to know who's won?</h1>
       <form id="input-form">
-        <div>
+        <div >
           <label for="start">First Ticket</label>
           <input type="number" id="start" name="start" value="1"><br>
         </div>
 
-        <div>
+        <div >
           <label for="last">Last Ticket</label>
           <input type="number" id="last" name="last" value="200"><br>
         </div>
 
-        <div>
+        <div >
           <label for="sample">Number of Winners</label>
           <input type="number" id="sample" name="sample" value="2"><br>
         </div>
 
-        <div>
+        <div >
           <input type="button" class="button" onclick="generateRandomNumbers()" value="Spin To Win"><br>
         </div>
 
@@ -157,37 +160,40 @@
 
         // hide the form when result is generating
         var x = document.getElementById("input-form");
-
         if (x.style.display === "none") {
           x.style.display = "block";
         } else {
           x.style.display = "none";
         }
-
+      
         // copy the values entered in the form
         var start = parseInt(document.getElementById("start").value);
         var last = parseInt(document.getElementById("last").value);
         var sample = parseInt(document.getElementById("sample").value);
-
+      
         // create the array of numbers based on the first and the last ticket number
         var numbers = [];
-
         for (var i = start; i <= last; i++) {
           numbers.push(i);
         }
-
-        // add the winner header to the output
-        output += "<h2>Winning tickets  &#127881; &#x1F389;</h2>";
-        
-        // find the random number
-        var final_numbers = numbers.sort(() => Math.random() - 0.5).slice(0, sample);
-
-        // add the final selected numbers into the output
-        output += "<p><b>" + final_numbers[1] + "</b> and <b>" + final_numbers[0] + "<b></p>";
-
-        // add the generated output to the html output div
-        document.getElementById("output").innerHTML = output;
+      
+        // generate random winners
+        var winners = [];
+        for (var j = 0; j < sample; j++) {
+          var randomIndex = Math.floor(Math.random() * numbers.length);
+          var winner = numbers.splice(randomIndex, 1);
+          winners.push(winner);
+        }
+      
+        // display the winners in the output div
+        var outputDiv = document.getElementById("output");
+        outputDiv.innerHTML = ""; // Clear previous content
+      
+        var outputText = document.createElement("p");
+        outputText.innerHTML = "Winners: " + winners.join(", "); // Set the winners as text content
+        outputDiv.appendChild(outputText);
       }
+      
     </script>
   </body>
 </html>
