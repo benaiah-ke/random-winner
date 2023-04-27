@@ -115,7 +115,11 @@
       }
       /* Add styles for the spinning wheel */
 
-
+      #giphy {
+        display: none;
+        margin-bottom: 20px;
+        width: 50%;
+      }
 
     </style>
 
@@ -144,6 +148,7 @@
       </form>
 
       <div id="output"></div>
+      <img src="assets/giphy.gif" alt="" id="giphy">
     </div>
 
     <div class="images">
@@ -189,6 +194,13 @@
         } else {
           x.style.display = "none";
         }
+
+        var y = document.getElementById("giphy");
+        if (y.style.display === "block") {
+          y.style.display = "none";
+        } else {
+          y.style.display = "block";
+        }
       
         // copy the values entered in the form
         var start = parseInt(document.getElementById("start").value);
@@ -214,7 +226,7 @@
         outputDiv.innerHTML = ""; // Clear previous content
       
         var outputText = document.createElement("p");
-        outputText.innerHTML = "Winners: " + winners.join(", "); // Set the winners as text content
+        outputText.innerHTML = " <b>The winners are: " + winners.join(" and "); // Set the winners as text content
         outputDiv.appendChild(outputText);
       }
       
